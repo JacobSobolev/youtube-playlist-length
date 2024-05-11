@@ -7,11 +7,15 @@ import Button from "@mui/material/Button";
 
 import "./InputArea.css";
 
-function InputArea() {
+function InputArea(props) {
   const [inputUrl, setInputUrl] = useState("");
 
   function handelInputChange(event) {
     setInputUrl(event.target.value);
+  }
+
+  function handleBtnClick(){
+    props.calcList(inputUrl);
   }
 
   return (
@@ -26,7 +30,7 @@ function InputArea() {
           />
         </Grid>
         <Grid item xs>
-          <Button variant="contained" fullWidth={true}>
+          <Button variant="contained" fullWidth={true} onClick={handleBtnClick}>
             Calculate
           </Button>
         </Grid>
