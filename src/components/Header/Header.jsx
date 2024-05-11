@@ -4,9 +4,7 @@ import "./Header.css";
 function Header() {
   return (
     <header>
-      <h1>
-        YouTube Playlist Length
-      </h1>
+      <h1>YouTube Playlist Length</h1>
     </header>
   );
 }
