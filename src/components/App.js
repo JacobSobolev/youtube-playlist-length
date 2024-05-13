@@ -9,7 +9,7 @@ import "./App.css";
 function App() {
   const YoutubeListApi =
     "https://www.googleapis.com/youtube/v3/playlists?part=snippet" +
-    "&id=PL59FEE129ADFF2B12&key=" +
+    "&key=" +
     process.env.REACT_APP_API_KEY;
 
   const YoutubeListItemsApi =
@@ -23,8 +23,8 @@ function App() {
     return data;
   }
 
-  async function getYoutubeListData(url) {
-    const res = await fetch(YoutubeListApi);
+  async function getYoutubeListData(listId) {
+    const res = await fetch(YoutubeListApi + "&id=" + listId);
     const data = await res.json();
     return data;
   }
@@ -37,14 +37,14 @@ function App() {
 
   async function calcList(url) {
     const listId = getPlaylistId(url);
-    // try {
-    //   const data = await getYoutubeListItemsData(url);
-    //   console.log(data);
-    //   const data2 = await getYoutubeListData(url);
-    //   console.log(data2);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const {
+        items: [{ snippet }],
+      } = await getYoutubeListData(listId);
+      console.log(snippet);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
