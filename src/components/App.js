@@ -29,15 +29,22 @@ function App() {
     return data;
   }
 
+  function getPlaylistId(url) {
+    const urlObj = new URL(url);
+    const listId = urlObj.searchParams.get("list");
+    return listId;
+  }
+
   async function calcList(url) {
-    try {
-      const data = await getYoutubeListItemsData(url);
-      console.log(data);
-      const data2 = await getYoutubeListData(url);
-      console.log(data2);
-    } catch (error) {
-      console.log(error);
-    }
+    const listId = getPlaylistId(url);
+    // try {
+    //   const data = await getYoutubeListItemsData(url);
+    //   console.log(data);
+    //   const data2 = await getYoutubeListData(url);
+    //   console.log(data2);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 
   return (
