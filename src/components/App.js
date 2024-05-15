@@ -25,8 +25,8 @@ function App() {
 
   async function getYoutubeListData(listId) {
     const res = await fetch(YoutubeListApi + "&id=" + listId);
-    const data = await res.json();
-    return data;
+    const { items: [{ snippet }] } = await res.json();
+    return snippet;
   }
 
   function getPlaylistId(url) {
@@ -39,14 +39,11 @@ function App() {
     const listId = getPlaylistId(url);
 
     try {
-      const {
-        items: [{ snippet }],
-      } = await getYoutubeListData(listId);
-      console.log(snippet);
+      const listData = await getYoutubeListData(listId);
+      console.log(listData);
 
       const videoList = await getYoutubeListItemsData(listId);
       console.log(videoList);
-
     } catch (error) {
       console.log(error);
     }
