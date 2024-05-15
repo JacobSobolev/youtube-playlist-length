@@ -14,11 +14,11 @@ function App() {
 
   const YoutubeListItemsApi =
     "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50" +
-    "&playlistId=PL59FEE129ADFF2B12&key=" +
+    "&key=" +
     process.env.REACT_APP_API_KEY;
 
-  async function getYoutubeListItemsData(url) {
-    const res = await fetch(YoutubeListItemsApi);
+  async function getYoutubeListItemsData(listId) {
+    const res = await fetch(YoutubeListItemsApi + "&playlistId=" + listId);
     const data = await res.json();
     return data;
   }
@@ -37,11 +37,16 @@ function App() {
 
   async function calcList(url) {
     const listId = getPlaylistId(url);
+
     try {
       const {
         items: [{ snippet }],
       } = await getYoutubeListData(listId);
       console.log(snippet);
+
+      const videoList = await getYoutubeListItemsData(listId);
+      console.log(videoList);
+
     } catch (error) {
       console.log(error);
     }
