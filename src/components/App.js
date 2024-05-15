@@ -18,9 +18,23 @@ function App() {
     process.env.REACT_APP_API_KEY;
 
   async function getYoutubeListItemsData(listId) {
-    const res = await fetch(YoutubeListItemsApi + "&playlistId=" + listId);
-    const data = await res.json();
-    return data;
+
+    const videoListId = [];
+    let pageToken = "";
+
+    do{
+      const res = await fetch(YoutubeListItemsApi + "&playlistId=" + listId + "&pageToken=" + pageToken);
+      const { items, nextPageToken } = await res.json();
+      pageToken = nextPageToken;
+
+      for(const item of items){
+        const {contentDetails: {videoId}} = item;
+        videoListId.push(videoId);
+      }
+    } while(pageToken);
+    
+    console.log(videoListId);
+    return videoListId;
   }
 
   async function getYoutubeListData(listId) {
@@ -39,11 +53,12 @@ function App() {
     const listId = getPlaylistId(url);
 
     try {
-      const listData = await getYoutubeListData(listId);
-      console.log(listData);
+      // const listData = await getYoutubeListData(listId);
+      // console.log(listData);
 
       const videoList = await getYoutubeListItemsData(listId);
-      console.log(videoList);
+      
+
     } catch (error) {
       console.log(error);
     }
