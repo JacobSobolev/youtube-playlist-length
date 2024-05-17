@@ -32,7 +32,6 @@ async function getYoutubeListItemsData(listId) {
 
     videoIds = [...items.map((item) => item.contentDetails.videoId)];
 
-    // console.log(videoIds.join(','));
     let videosDuration = await getVideosDuration(videoIds.join(","));
     videoListTime = videoListTime.concat(videosDuration);
     videoIds = [];
