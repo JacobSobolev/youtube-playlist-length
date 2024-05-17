@@ -30,13 +30,7 @@ async function getYoutubeListItemsData(listId) {
     const { items, nextPageToken } = await res.json();
     pageToken = nextPageToken;
 
-    for (const item of items) {
-      const {
-        contentDetails: { videoId },
-      } = item;
-
-      videoIds.push(videoId);
-    }
+    videoIds = [...items.map((item) => item.contentDetails.videoId)];
 
     // console.log(videoIds.join(','));
     let videosDuration = await getVideosDuration(videoIds.join(","));
@@ -62,7 +56,7 @@ async function getVideosDuration(videoIds) {
       return Moment.duration(item.contentDetails.duration).asMinutes();
     }),
   ];
-  
+
   return videosDuration;
 }
 
