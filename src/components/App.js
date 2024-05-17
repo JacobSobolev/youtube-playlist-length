@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import InputArea from "./InputArea/InputArea";
+import OutputArea from "./OutputArea/OutputArea";
 
 import "./App.css";
 
@@ -35,6 +36,7 @@ function App() {
     <div>
       <Header />
       <InputArea calcList={calcList} />
+      <OutputArea />
       <Footer />
     </div>
   );
