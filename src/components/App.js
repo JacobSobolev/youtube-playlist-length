@@ -7,11 +7,12 @@ import OutputArea from "./OutputArea/OutputArea";
 
 import "./App.css";
 
-import {getYoutubeListItemsData, getYoutubeListData} from "../utils/youtubeUtil";
+import {
+  getYoutubeListItemsData,
+  getYoutubeListData,
+} from "../utils/youtubeUtil";
 
 function App() {
-  
-
   function getPlaylistId(url) {
     const urlObj = new URL(url);
     const listId = urlObj.searchParams.get("list");

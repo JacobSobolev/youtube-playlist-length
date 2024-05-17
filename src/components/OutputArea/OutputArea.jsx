@@ -1,10 +1,14 @@
 import React from "react";
 
+import Container from "@mui/material/Container";
+
 import "./OutputArea.css";
 
 function OutputArea(props){
     return(
-        <div>output Area</div>
+        <Container className="container" maxWidth="lg">
+            <div>output Area</div>
+        </Container>
     );
 }
 
