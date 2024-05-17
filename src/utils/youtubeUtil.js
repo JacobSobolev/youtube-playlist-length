@@ -19,7 +19,8 @@ const YoutubeListItemsApi =
   process.env.REACT_APP_API_KEY;
 
 async function getYoutubeListItemsData(listId) {
-  const videoListTime = [];
+  let videoListTime = [];
+  let videoIds = [];
   let pageToken = "";
 
   do {
@@ -34,10 +35,13 @@ async function getYoutubeListItemsData(listId) {
         contentDetails: { videoId },
       } = item;
 
-      const videoDuration = await getVideoDuration(videoId);
-      const itemtopush = Moment.duration(videoDuration).asMinutes();
-      videoListTime.push(itemtopush);
+      videoIds.push(videoId);
     }
+
+    // console.log(videoIds.join(','));
+    let videosDuration = await getVideosDuration(videoIds.join(","));
+    videoListTime = videoListTime.concat(videosDuration);
+    videoIds = [];
   } while (pageToken);
 
   return videoListTime;
@@ -48,18 +52,18 @@ const YoutubeVideoApi =
   "&key=" +
   process.env.REACT_APP_API_KEY;
 
-async function getVideoDuration(videoId) {
-  const res = await fetch(YoutubeVideoApi + "&id=" + videoId);
-  const resJson = await res.json();
-  const {
-    items: [
-      {
-        contentDetails: { duration },
-      },
-    ],
-  } = resJson;
+async function getVideosDuration(videoIds) {
+  let videosDuration = [];
+  const res = await fetch(YoutubeVideoApi + "&id=" + videoIds);
+  const { items } = await res.json();
 
-  return duration;
+  videosDuration = [
+    ...items.map((item) => {
+      return Moment.duration(item.contentDetails.duration).asMinutes();
+    }),
+  ];
+  
+  return videosDuration;
 }
 
-export {getYoutubeListData, getYoutubeListItemsData}
+export { getYoutubeListData, getYoutubeListItemsData };
