@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Moment from "moment";
 
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
@@ -12,35 +13,60 @@ function App() {
     "&key=" +
     process.env.REACT_APP_API_KEY;
 
+  async function getYoutubeListData(listId) {
+    const res = await fetch(YoutubeListApi + "&id=" + listId);
+    const {
+      items: [{ snippet }],
+    } = await res.json();
+    return snippet;
+  }
+
   const YoutubeListItemsApi =
     "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50" +
     "&key=" +
     process.env.REACT_APP_API_KEY;
 
   async function getYoutubeListItemsData(listId) {
-
-    const videoListId = [];
+    const videoListTime = [];
+    const videoListIds = [];
     let pageToken = "";
 
-    do{
-      const res = await fetch(YoutubeListItemsApi + "&playlistId=" + listId + "&pageToken=" + pageToken);
+    do {
+      const res = await fetch(
+        YoutubeListItemsApi +
+          "&playlistId=" +
+          listId +
+          "&pageToken=" +
+          pageToken
+      );
       const { items, nextPageToken } = await res.json();
       pageToken = nextPageToken;
 
-      for(const item of items){
-        const {contentDetails: {videoId}} = item;
-        videoListId.push(videoId);
+      for (const item of items) {
+        const {
+          contentDetails: { videoId },
+        } = item;
+
+        const videoDuration = await getVideoDuration(videoId);
+        const itemtopush = Moment.duration(videoDuration).asMinutes();
+        videoListTime.push(itemtopush);
       }
-    } while(pageToken);
-    
-    console.log(videoListId);
-    return videoListId;
+    } while (pageToken);
+
+    console.log(videoListTime);
+    return videoListTime;
   }
 
-  async function getYoutubeListData(listId) {
-    const res = await fetch(YoutubeListApi + "&id=" + listId);
-    const { items: [{ snippet }] } = await res.json();
-    return snippet;
+  const YoutubeVideoApi =
+  "https://www.googleapis.com/youtube/v3/videos?part=contentDetails" +
+  "&key=" +
+  process.env.REACT_APP_API_KEY;
+
+  async function getVideoDuration(videoId){
+    const res = await fetch(YoutubeVideoApi + "&id=" + videoId);
+    const resJson = await res.json();
+    const {items: [{contentDetails: {duration}}]} = resJson;
+    return duration;
   }
 
   function getPlaylistId(url) {
@@ -57,8 +83,6 @@ function App() {
       // console.log(listData);
 
       const videoList = await getYoutubeListItemsData(listId);
-      
-
     } catch (error) {
       console.log(error);
     }
