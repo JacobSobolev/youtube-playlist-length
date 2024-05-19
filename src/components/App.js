@@ -14,13 +14,7 @@ import {
 } from "../utils/youtubeUtil";
 
 function App() {
-  const [playListData, setPlaylistData] = useState({
-    title: "",
-    description: "",
-    img: "",
-    numOfVids: 0,
-    totalLength: 0,
-  });
+  const [playListData, setPlaylistData] = useState({});
 
   function getPlaylistId(url) {
     const urlObj = new URL(url);
@@ -33,10 +27,10 @@ function App() {
 
     try {
       const listData = await getYoutubeListData(listId);
-      console.log(listData);
+      // console.log(listData);
 
       const videoListDuration = await getYoutubeListItemsData(listId);
-      console.log(videoListDuration);
+      // console.log(videoListDuration);
 
       setPlaylistData({
         title: listData.title,
