@@ -52,7 +52,7 @@ async function getVideosDuration(videoIds) {
 
   videosDuration = [
     ...items.map((item) => {
-      return Moment.duration(item.contentDetails.duration).asMinutes();
+      return Moment.duration(item.contentDetails.duration).asSeconds();
     }),
   ];
 
