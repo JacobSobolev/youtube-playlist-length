@@ -30,7 +30,7 @@ function InputArea(props) {
           />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Button variant="contained" fullWidth={true} onClick={handleBtnClick}>
+          <Button variant="contained" fullWidth={true} onClick={handleBtnClick} color="primary">
             Calculate
           </Button>
         </Grid>

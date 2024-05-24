@@ -6,6 +6,9 @@ import Footer from "./Footer/Footer";
 import InputArea from "./InputArea/InputArea";
 import OutputArea from "./OutputArea/OutputArea";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { red } from "@mui/material/colors";
+
 import "./App.css";
 
 import {
@@ -14,6 +17,17 @@ import {
 } from "../utils/youtubeUtil";
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#008a86',
+      },
+      secondary: {
+        main: red[500],
+      },
+    },
+  });
+
   const [playListData, setPlaylistData] = useState({});
 
   function getPlaylistId(url) {
@@ -46,10 +60,12 @@ function App() {
 
   return (
     <div>
-      <Header />
-      <InputArea calcList={calcList} />
-      <OutputArea playlistData={playListData} />
-      <Footer />
+      <ThemeProvider theme={theme}>
+        <Header />
+        <InputArea calcList={calcList} />
+        <OutputArea playlistData={playListData} />
+        <Footer />
+      </ThemeProvider>
     </div>
   );
 }
