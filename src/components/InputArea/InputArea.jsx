@@ -21,7 +21,7 @@ function InputArea(props) {
   return (
     <Container className="container" maxWidth="lg">
       <Grid container spacing={2} alignItems="flex-end">
-        <Grid item xs={9}>
+        <Grid item xs={12} sm={9}>
           <TextField
             fullWidth
             label="YouTube Playlist URL"
@@ -29,7 +29,7 @@ function InputArea(props) {
             onChange={handelInputChange}
           />
         </Grid>
-        <Grid item xs>
+        <Grid item xs={12} sm={3}>
           <Button variant="contained" fullWidth={true} onClick={handleBtnClick}>
             Calculate
           </Button>
