@@ -15,7 +15,6 @@ import LengthListItem from "../LengthListItem/LengthListItem";
 import "./OutputArea.css";
 
 function OutputArea(props) {
-
   function formatTime(timeInSec) {
     return moment.utc(timeInSec * 1000).format("HH:mm:ss");
   }
@@ -31,39 +30,40 @@ function OutputArea(props) {
   ];
 
   return (
-    title &&
-    <Container className="container" maxWidth="lg" hidden="true">
-      <Card sx={{ maxWidth: 400 }}>
-        <CardMedia sx={{ height: 225 }} image={img} />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
-          <Typography sx={{ mt: 2 }} paragraph>
-            Number Of Vidoes: {numOfVids}
-            <br />
-            Avrage Video Length: {formatTime(totalLength / numOfVids)}
-          </Typography>
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <Typography sx={{ mt: 1}} variant="h6" component="div">
-                Total Playlist Length: {formatTime(totalLength)}
-              </Typography>
-              <div>
-                <List>
-                  {speedList.map((item, index) => {
-                    return <LengthListItem key={index} primary={item}/>
-                  })}
-                </List>
-              </div>
+    title && (
+      <Container className="container" maxWidth="lg" hidden="true">
+        <Card sx={{ maxWidth: 400 }}>
+          <CardMedia sx={{ height: 225 }} image={img} />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {description}
+            </Typography>
+            <Typography sx={{ mt: 2 }} paragraph>
+              Number Of Vidoes: {numOfVids}
+              <br />
+              Avrage Video Length: {formatTime(totalLength / numOfVids)}
+            </Typography>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <Typography sx={{ mt: 1 }} variant="h6" component="div">
+                  Total Playlist Length: {formatTime(totalLength)}
+                </Typography>
+                <div>
+                  <List>
+                    {speedList.map((item, index) => {
+                      return <LengthListItem key={index} primary={item} />;
+                    })}
+                  </List>
+                </div>
+              </Grid>
             </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-    </Container>
+          </CardContent>
+        </Card>
+      </Container>
+    )
   );
 }
 

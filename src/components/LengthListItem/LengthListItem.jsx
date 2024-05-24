@@ -5,17 +5,17 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import SpeedIcon from "@mui/icons-material/Speed";
 
-import "./LengthListItem.css"
+import "./LengthListItem.css";
 
-function LengthListItem(props){
-    return (
-        <ListItem>
-        <ListItemIcon>
-          <SpeedIcon />
-        </ListItemIcon>
-        <ListItemText primary={props.primary} />
-      </ListItem>
-    );
+function LengthListItem(props) {
+  return (
+    <ListItem>
+      <ListItemIcon>
+        <SpeedIcon />
+      </ListItemIcon>
+      <ListItemText primary={props.primary} />
+    </ListItem>
+  );
 }
 
 export default LengthListItem;
