@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import InputArea from "./components/InputArea";
 import OutputArea from "./components/OutputArea";
+import ErrorDisplay from "./components/ErrorDisplay";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
@@ -29,6 +30,7 @@ function App() {
   });
 
   const [playListData, setPlaylistData] = useState({});
+  const [error, setError] = useState();
 
   function getPlaylistId(url) {
     const urlObj = new URL(url);
@@ -37,9 +39,11 @@ function App() {
   }
 
   async function calcList(url) {
-    const listId = getPlaylistId(url);
+    
 
     try {
+      const listId = getPlaylistId(url);
+
       const listData = await getYoutubeListData(listId);
       const videoListDuration = await getYoutubeListItemsData(listId);
 
@@ -50,8 +54,8 @@ function App() {
         numOfVids: videoListDuration.length,
         totalLength: videoListDuration.reduce((a, b) => a + b),
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      setError(err);
     }
   }
 
@@ -61,6 +65,7 @@ function App() {
         <Header />
         <InputArea calcList={calcList} />
         <OutputArea playlistData={playListData} />
+        <ErrorDisplay msg={error?.message}/>
         <Footer />
       </ThemeProvider>
     </div>
