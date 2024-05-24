@@ -9,6 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
 
 import LengthListItem from "../LengthListItem/LengthListItem";
 
@@ -44,26 +45,31 @@ function OutputArea(props) {
               <Typography gutterBottom variant="h5" component="div">
                 {title}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body" color="text.secondary">
                 {description}
               </Typography>
-              <Typography sx={{ mt: 2 }} paragraph>
-                Number Of Vidoes: {numOfVids}
-                <br />
-                Avrage Video Length: {formatTime(totalLength / numOfVids)}
-              </Typography>
+
+              <Divider sx={{ mt: 2, mb: 2 }} />
+
               <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <Typography sx={{ mt: 1 }} variant="h6" component="div">
                     Total Playlist Length: {formatTime(totalLength)}
                   </Typography>
-                  <div>
-                    <List>
-                      {speedList.map((item, index) => {
-                        return <LengthListItem key={index} primary={item} />;
-                      })}
-                    </List>
-                  </div>
+
+                  <List>
+                    {speedList.map((item, index) => {
+                      return <LengthListItem key={index} primary={item} />;
+                    })}
+                  </List>
+
+                  <Divider sx={{ mt: 2, mb: 2 }} />
+
+                  <Typography variant="body1">
+                    Number Of Vidoes: {numOfVids}
+                    <br />
+                    Avrage Video Length: {formatTime(totalLength / numOfVids)}
+                  </Typography>
                 </Grid>
               </Grid>
             </CardContent>
