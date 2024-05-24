@@ -5,9 +5,11 @@ import Container from "@mui/material/Container";
 
 function Footer() {
   return (
-    <footer>
-      <p>Made by Jacob Sobolev</p>
-    </footer>
+    <Container className="container" maxWidth="lg">
+      <footer>
+        <p>Made by Jacob Sobolev</p>
+      </footer>
+    </Container>
   );
 }
 

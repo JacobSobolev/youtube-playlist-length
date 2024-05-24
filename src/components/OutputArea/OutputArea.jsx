@@ -31,7 +31,7 @@ function OutputArea(props) {
 
   return (
     title && (
-      <Container className="container" maxWidth="lg" hidden="true">
+      <Container className="container" maxWidth="lg">
         <Card sx={{ maxWidth: 400 }}>
           <CardMedia sx={{ height: 225 }} image={img} />
           <CardContent>
