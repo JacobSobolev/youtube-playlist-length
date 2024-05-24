@@ -8,6 +8,7 @@ function Footer() {
     <Container className="container" maxWidth="lg">
       <footer>
         <p>Made by Jacob Sobolev</p>
+        <a href="https://github.com/JacobSobolev/youtube-playlist-length">Source Code</a>
       </footer>
     </Container>
   );
