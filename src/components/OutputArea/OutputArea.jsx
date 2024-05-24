@@ -9,11 +9,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 
-import SpeedIcon from "@mui/icons-material/Speed";
+import LengthListItem from "../LengthListItem/LengthListItem";
 
 import "./OutputArea.css";
 
@@ -46,28 +43,19 @@ function OutputArea(props) {
             {description}
           </Typography>
           <Typography sx={{ mt: 2 }} paragraph>
-            Number of vidoes: {numOfVids}
+            Number Of Vidoes: {numOfVids}
             <br />
-            Avrage video length: {formatTime(totalLength / numOfVids)}
+            Avrage Video Length: {formatTime(totalLength / numOfVids)}
           </Typography>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Typography sx={{ mt: 2, mb: 2 }} variant="h6" component="div">
+              <Typography sx={{ mt: 1}} variant="h6" component="div">
                 Total Playlist Length: {formatTime(totalLength)}
               </Typography>
               <div>
                 <List>
                   {speedList.map((item, index) => {
-                    return (
-                      <div key={index}>
-                        <ListItem>
-                          <ListItemIcon>
-                            <SpeedIcon />
-                          </ListItemIcon>
-                          <ListItemText primary={item} />
-                        </ListItem>
-                      </div>
-                    );
+                    return <LengthListItem key={index} primary={item}/>
                   })}
                 </List>
               </div>
