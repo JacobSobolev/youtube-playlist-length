@@ -33,8 +33,16 @@ function App() {
   const [error, setError] = useState();
 
   function getPlaylistId(url) {
+    if (url.length === 0)
+      throw new Error("URL Empty");
+    if (!url.includes("youtube.com"))
+      throw new Error("URL needs to be from youtube.com");
+
     const urlObj = new URL(url);
     const listId = urlObj.searchParams.get("list");
+
+    if (!url.listId)
+      throw new Error("URL isn't a playlist from youtube");
     return listId;
   }
 
