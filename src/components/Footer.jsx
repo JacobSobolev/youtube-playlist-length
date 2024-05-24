@@ -6,7 +6,7 @@ import Chip from "@mui/material/Chip";
 
 function Footer() {
   return (
-    <Container className="container" maxWidth="lg" sx={{mb:2, textAlign: "center"}}>
+    <Container className="container" maxWidth="lg" sx={{mb:2, mt: "auto", textAlign: "center"}}>
       <footer>
         <a href="https://github.com/JacobSobolev/youtube-playlist-length">
           <Chip icon={<GitHubIcon />} label="Made by Jacob Sobolev" color="primary" variant="outlined"/>

@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import InputArea from "./components/InputArea";
 import OutputArea from "./components/OutputArea";
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
 import "./App.css";
@@ -20,7 +20,7 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#008a86',
+        main: "#008a86",
       },
       secondary: {
         main: red[500],
@@ -41,10 +41,7 @@ function App() {
 
     try {
       const listData = await getYoutubeListData(listId);
-      // console.log(listData);
-
       const videoListDuration = await getYoutubeListItemsData(listId);
-      // console.log(videoListDuration);
 
       setPlaylistData({
         title: listData.title,
@@ -59,7 +56,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="App">
       <ThemeProvider theme={theme}>
         <Header />
         <InputArea calcList={calcList} />
