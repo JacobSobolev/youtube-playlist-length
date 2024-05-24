@@ -5,8 +5,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import SpeedIcon from "@mui/icons-material/Speed";
 
-import "./LengthListItem.css";
-
 function LengthListItem(props) {
   return (
     <ListItem>

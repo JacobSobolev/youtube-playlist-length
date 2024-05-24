@@ -11,9 +11,7 @@ import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 
-import LengthListItem from "../LengthListItem/LengthListItem";
-
-import "./OutputArea.css";
+import LengthListItem from "./LengthListItem";
 
 function OutputArea(props) {
   function formatTime(timeInSec) {

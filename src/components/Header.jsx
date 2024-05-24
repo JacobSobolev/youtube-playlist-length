@@ -1,5 +1,4 @@
 import React from "react";
-import "./Header.css";
 
 import Typography from "@mui/material/Typography";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import moment from "moment";
 
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import InputArea from "./InputArea/InputArea";
-import OutputArea from "./OutputArea/OutputArea";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import InputArea from "./components/InputArea";
+import OutputArea from "./components/OutputArea";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { red } from "@mui/material/colors";
@@ -14,7 +14,7 @@ import "./App.css";
 import {
   getYoutubeListItemsData,
   getYoutubeListData,
-} from "../utils/youtubeUtil";
+} from "./utils/youtubeUtil";
 
 function App() {
   const theme = createTheme({

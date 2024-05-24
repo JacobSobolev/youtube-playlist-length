@@ -5,8 +5,6 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-import "./InputArea.css";
-
 function InputArea(props) {
   const [inputUrl, setInputUrl] = useState("");
 
@@ -19,7 +17,7 @@ function InputArea(props) {
   }
 
   return (
-    <Container className="container" maxWidth="lg">
+    <Container className="container" maxWidth="lg" sx={{mt: 3, mb: 3}}>
       <Grid container spacing={2} alignItems="flex-end">
         <Grid item xs={12} sm={9}>
           <TextField
