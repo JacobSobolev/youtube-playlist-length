@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import moment from "moment";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -32,36 +31,30 @@ function App() {
   const [playListData, setPlaylistData] = useState({});
   const [error, setError] = useState();
 
-  function getPlaylistId(url) {
-    if (url.length === 0) throw new Error("Empty URL");
-    if (!url.includes("youtube.com"))
-      throw new Error("URL needs to be from youtube.com");
-
-    const urlObj = new URL(url);
+  function getPlaylistId(strUrl) {
+    const urlObj = new URL(strUrl);
     const listId = urlObj.searchParams.get("list");
 
-    if (!listId) throw new Error("URL isn't a playlist from youtube");
     return listId;
   }
 
-  async function calcList(url) {
+  async function calcList(strUrl) {
     try {
-      const listId = getPlaylistId(url);
+      const listId = getPlaylistId(strUrl);
 
       const listData = await getYoutubeListData(listId);
       const videoListDuration = await getYoutubeListItemsData(listId);
 
-      console.log(listData.thumbnails);
-
       setPlaylistData({
-        title: listData.title,
+        title: listData?.title,
         description: listData.description,
-        img: listData.thumbnails.maxres.url,
+        img: listData.thumbnails.high?.url,
         numOfVids: videoListDuration.length,
         totalLength: videoListDuration.reduce((a, b) => a + b),
       });
       setError({});
     } catch (err) {
+      console.log(err);
       setError(err);
       setPlaylistData({});
     }
