@@ -33,16 +33,14 @@ function App() {
   const [error, setError] = useState();
 
   function getPlaylistId(url) {
-    if (url.length === 0)
-      throw new Error("Empty URL");
+    if (url.length === 0) throw new Error("Empty URL");
     if (!url.includes("youtube.com"))
       throw new Error("URL needs to be from youtube.com");
 
     const urlObj = new URL(url);
     const listId = urlObj.searchParams.get("list");
 
-    if (!listId)
-      throw new Error("URL isn't a playlist from youtube");
+    if (!listId) throw new Error("URL isn't a playlist from youtube");
     return listId;
   }
 
@@ -75,7 +73,7 @@ function App() {
         <Header />
         <InputArea calcList={calcList} />
         <OutputArea playlistData={playListData} />
-        <ErrorDisplay msg={error?.message}/>
+        <ErrorDisplay msg={error?.message} />
         <Footer />
       </ThemeProvider>
     </div>
