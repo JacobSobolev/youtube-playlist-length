@@ -30,7 +30,7 @@ function OutputArea(props) {
 
   return (
     title && (
-      <Container className="container" maxWidth="lg" sx={{mb: 2}}>
+      <Container className="container" maxWidth="lg" sx={{ mb: 2 }}>
         <Grid
           container
           direction="row"
