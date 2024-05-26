@@ -34,36 +34,38 @@ function App() {
 
   function getPlaylistId(url) {
     if (url.length === 0)
-      throw new Error("URL Empty");
+      throw new Error("Empty URL");
     if (!url.includes("youtube.com"))
       throw new Error("URL needs to be from youtube.com");
 
     const urlObj = new URL(url);
     const listId = urlObj.searchParams.get("list");
 
-    if (!url.listId)
+    if (!listId)
       throw new Error("URL isn't a playlist from youtube");
     return listId;
   }
 
   async function calcList(url) {
-    
-
     try {
       const listId = getPlaylistId(url);
 
       const listData = await getYoutubeListData(listId);
       const videoListDuration = await getYoutubeListItemsData(listId);
 
+      console.log(listData.thumbnails);
+
       setPlaylistData({
         title: listData.title,
         description: listData.description,
-        img: listData.thumbnails.standard.url,
+        img: listData.thumbnails.maxres.url,
         numOfVids: videoListDuration.length,
         totalLength: videoListDuration.reduce((a, b) => a + b),
       });
+      setError({});
     } catch (err) {
       setError(err);
+      setPlaylistData({});
     }
   }
 
