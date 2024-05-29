@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import "./App.css";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import InputArea from "./components/InputArea";
 import OutputArea from "./components/OutputArea";
 import ErrorDisplay from "./components/ErrorDisplay";
+import AppHelper from "./components/AppHelper";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
-
-import "./App.css";
 
 import {
   getYoutubeListItemsData,
@@ -54,7 +54,6 @@ function App() {
       });
       setError({});
     } catch (err) {
-      console.log(err);
       setError(err);
       setPlaylistData({});
     }
@@ -65,6 +64,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Header />
         <InputArea calcList={calcList} />
+        <AppHelper show={!playListData?.title} />
         <OutputArea playlistData={playListData} />
         <ErrorDisplay msg={error?.message} />
         <Footer />

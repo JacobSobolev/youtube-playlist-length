@@ -7,3 +7,7 @@ header {
   display: flex;
   flex-direction: column;
 }
+
+.HelpSteps li{
+  margin: 5px 0;
+}
