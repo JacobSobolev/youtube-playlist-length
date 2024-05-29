@@ -47,7 +47,7 @@ function App() {
 
       setPlaylistData({
         title: listData?.title,
-        description: listData.description,
+        description: `${listData.description.substring(0, 100)}...`,
         img: listData.thumbnails.high?.url,
         numOfVids: videoListDuration.length,
         totalLength: videoListDuration.reduce((a, b) => a + b),
