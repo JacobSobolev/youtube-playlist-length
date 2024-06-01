@@ -2,7 +2,6 @@ import React from "react";
 
 import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import Collapse from "@mui/material/Collapse";
 import {Typography } from "@mui/material";
 
@@ -12,11 +11,9 @@ function AppHelper(props) {
     <Container className="container" maxWidth="lg" sx={{ mb: 2 }}>
       <Collapse in={props.show}>
         <Alert severity="info">
-          <AlertTitle>How to Use</AlertTitle>
           <Typography variant="body1">
-            Welcome to the YouTube Playlist Length! Follow the steps below to
-            calculate the total playback length of any YouTube playlist at
-            various speeds.
+            Calculate the total playback length of any YouTube playlist at normal speed 
+            and various speeds.
           </Typography>
 
           <ol className="HelpSteps">

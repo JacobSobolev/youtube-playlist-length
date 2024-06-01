@@ -45,10 +45,17 @@ function App() {
       const listData = await getYoutubeListData(listId);
       const videoListDuration = await getYoutubeListItemsData(listId);
 
+      const thumbnailsArr = Object.keys(listData.thumbnails).map(
+        (key) => listData.thumbnails[key]
+      );
+      thumbnailsArr.sort((a, b) => {
+        return b.height - a.height;
+      });
+
       setPlaylistData({
         title: listData?.title,
-        description: listData.description,
-        img: listData.thumbnails.high?.url,
+        description: `${listData.description.substring(0, 100)}...`,
+        img: thumbnailsArr[0]?.url,
         numOfVids: videoListDuration.length,
         totalLength: videoListDuration.reduce((a, b) => a + b),
       });
