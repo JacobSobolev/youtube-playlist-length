@@ -11,7 +11,7 @@ function LengthListItem(props) {
       <ListItemIcon>
         <SpeedIcon />
       </ListItemIcon>
-      <ListItemText primary={props.primary} />
+      <ListItemText primary={props.primary} secondary={props.secondary} />
     </ListItem>
   );
 }

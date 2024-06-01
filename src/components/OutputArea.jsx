@@ -1,7 +1,5 @@
 import React from "react";
 
-import moment from "moment";
-
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -15,17 +13,33 @@ import LengthListItem from "./LengthListItem";
 
 function OutputArea(props) {
   function formatTime(timeInSec) {
-    return moment.utc(timeInSec * 1000).format("HH:mm:ss");
+    const hours = Math.floor(timeInSec / 3600);
+    const minutes = Math.floor((timeInSec - hours * 3600) / 60);
+    const seconds = Math.floor(timeInSec - hours * 3600 - minutes * 60);
+
+    return `${hours ? hours : ""} ${hours ? "Hours," : ""} ${minutes ? minutes : ""} ${minutes ? "Minutes," : ""} ${seconds} Seconds`;
   }
 
   const { title, description, img, numOfVids, totalLength } =
     props.playlistData;
 
   const speedList = [
-    "At 1.25x = " + formatTime(totalLength / 1.25),
-    "At 1.5x = " + formatTime(totalLength / 1.5),
-    "At 1.75x = " + formatTime(totalLength / 1.75),
-    "At 2x = " + formatTime(totalLength / 2),
+    {
+      primary: "At 1.25x Speed",
+      secondary: formatTime(totalLength / 1.25),
+    },
+    {
+      primary: "At 1.5x Speed",
+      secondary: formatTime(totalLength / 1.5),
+    },
+    {
+      primary: "At 1.75x Speed",
+      secondary: formatTime(totalLength / 1.75),
+    },
+    {
+      primary: "At 2x Speed",
+      secondary: formatTime(totalLength / 2),
+    },
   ];
 
   return (
@@ -47,21 +61,30 @@ function OutputArea(props) {
                 {description}
               </Typography>
 
-              <Divider sx={{ mt: 2, mb: 2 }} />
+              <Divider sx={{ mt: 2, mb: 1 }} />
 
               <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <Typography sx={{ mt: 1 }} variant="h6" component="div">
-                    Total Playlist Length: {formatTime(totalLength)}
+                    Total Playlist Length
+                  </Typography>
+                  <Typography variant="body1" component="div">
+                    {formatTime(totalLength)}
                   </Typography>
 
                   <List>
                     {speedList.map((item, index) => {
-                      return <LengthListItem key={index} primary={item} />;
+                      return (
+                        <LengthListItem
+                          key={index}
+                          primary={item.primary}
+                          secondary={item.secondary}
+                        />
+                      );
                     })}
                   </List>
 
-                  <Divider sx={{ mt: 2, mb: 2 }} />
+                  <Divider sx={{ mt: 1, mb: 2 }} />
 
                   <Typography variant="body1">
                     Number Of Vidoes: {numOfVids}
